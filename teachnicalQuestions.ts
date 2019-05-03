@@ -135,3 +135,85 @@ const stringCompression = (str: string): string => {
 };
 
 stringCompression('aaabbc');
+
+// given an image represented by NxN matrix, where each pixel in the image is represented by an intger, write a mehtod to rotate the image by 90 degrees. Can you do this in place?
+const rotate = (matrix) => {
+  // if there is empty matrix passed
+  /* or if there is a matrix that isn't square, ie length of one inner array
+  is different that the outer array*/
+  if (matrix.length === 0 || matrix[0].length !== matrix.length) {
+    return false;
+  }
+  console.log('starting matrix\n', matrix);
+  let n = matrix.length;
+  // for loop for the layers, in a 4x4 matrix should be two layers, 3x3 should be 1 layer, NxN should be n/2 or less layers
+  for (let layer = 0; layer < n / 2; layer++) {
+    // first is the first index in the layer
+    let first = layer; //first iteration 0, then 1
+    let last = n - 1 - layer; //first iteration 3, then 2
+
+    // inner for loop to iterate through the individual portion of the array that's being changed
+    for (let i = first; i < last; i++) {
+      let offset = i - first;
+      let temp = matrix[first][i];
+      // let temp = matrix[0][0]
+      // let temp = matrix[0][1]
+
+      // reassign the top[i] as left[0]
+      matrix[first][i] = matrix[last - offset][first];
+      // matrix[0][0] = matrix[3][0]
+      // matrix[0][1] = matrix[2][0]
+
+      // reassign left[0] as bottom[last-i]
+      matrix[last - offset][first] = matrix[last][last - offset];
+      // matrix[3][0] = matrix[3][3]
+      // matrix[2][0] = matrix[3][2]
+
+      // reassign bottom[last-1] as right[last]
+      matrix[last][last - offset] = matrix[i][last];
+      // matrix[3][3] = matrix [0][3]
+      // matrix[3][2] = matrix [1][3]
+
+      // reassign right[last] as top[i]
+      matrix[i][last] = temp;
+      // matrix[0][3] = temp
+      // matrix[1][3] = temp
+    }
+    console.log(`finished inner for loop ${layer} time\n`, matrix);
+  }
+  console.log('final matrix \n', matrix);
+  return true;
+};
+rotate([[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]]);
+
+// ZERO MATRIX:
+// write an algorithm such that if an element in an MxN matrix is 0, ts entire row and column are set to zero
+const zeroMatrix = (matrix: number[][]) => {
+  let colZeros: number[] = [];
+  let rowZeros: number[] = [];
+
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row].length; col++) {
+      if (matrix[row][col] === 0) {
+        colZeros.push(col);
+        rowZeros.push(row);
+      }
+    }
+  }
+
+  for (let row = 0; row < matrix.length; row++) {
+    if (rowZeros.includes(row)) {
+      matrix[row].fill(0);
+      row++;
+    }
+    for (let col = 0; col < matrix[row].length; col++) {
+      if (colZeros.includes(col)) {
+        matrix[row][col] = 0;
+      }
+    }
+  }
+  console.log(matrix);
+  return matrix;
+};
+
+zeroMatrix([[1, 1, 1, 1], [1, 1, 0, 1], [1, 1, 1, 1]]);
