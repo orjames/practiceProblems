@@ -112,3 +112,26 @@ const OneAway = (str1: string, str2: string): boolean => {
   }
   return true;
 };
+
+// implement a method to perfomr basic string stringCompression using counts of repeated characters. for exapmple the string aabcccccaaa would beecome a2b1c5a3. if the compressed string would not be smaller than the original string, return the orignal string. assume the string has only uppercase and lowercase letters (a-z)
+const stringCompression = (str: string): string => {
+  // do data validation
+  let answer: string[] = [];
+  for (let i: number = 0; i < str.length; i++) {
+    let char = str.charAt(i);
+    let count = 1;
+    while (str.charAt(i + 1) === char && i < str.length) {
+      count++;
+      i++;
+    }
+    answer.push(char);
+    answer.push(count.toString());
+  }
+  if (answer.join('').length < str.length) {
+    return answer.join('');
+  } else {
+    return str;
+  }
+};
+
+stringCompression('aaabbc');
