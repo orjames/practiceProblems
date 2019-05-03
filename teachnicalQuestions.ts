@@ -72,3 +72,43 @@ const isPermutationOfPalendrome = (phrase) => {
   }
   return countOdd <= 1;
 };
+
+//There are three types of edits that can be performed on strings:
+// insert a character, remove a character, or replace a character.
+// Given two strings, write a function to check if they are one edit (or zero edits) away.
+// EXAMPLE pale, ple -> true pales, pale -> true pale, bale -> true pale, bake -> false
+
+const OneAway = (str1: string, str2: string): boolean => {
+  // if the strings are not one character apart or equal
+  if (Math.abs(str1.length - str2.length) > 0) {
+    return false;
+  }
+  // set the shorter and longer string
+  let shorter = str1 < str2 ? str1 : str2;
+  let longer = str1 < str2 ? str2 : str1;
+
+  // starting the indexes for iterating through each string
+  let index1: number = 0;
+  let index2: number = 0;
+  let foundDifference: boolean = false;
+  while (index1 < shorter.length && index2 < longer.length) {
+    // if the characters don't match
+    if (shorter.charAt(index1) !== longer.charAt(index2)) {
+      // make sure this is the first difference
+      if (foundDifference) {
+        return false;
+      }
+      // first difference, flag it
+      foundDifference = true;
+      // if we are in replace case
+      if (shorter.length === longer.length) {
+        // increment the "shorter" string once to skip over the replaceable character
+        index1++;
+      }
+    } else {
+      index1++; // if the characters do match, move shorter string index
+    }
+    index2++; //always increment index2
+  }
+  return true;
+};
