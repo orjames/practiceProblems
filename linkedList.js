@@ -180,5 +180,5 @@ myList.printList();
 myList.add(4);
 myList.add(3);
 myList.printList();
-mylist.removeDups();
+myList.removeDups();
 myList.printList();
