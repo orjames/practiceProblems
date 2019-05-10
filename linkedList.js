@@ -169,6 +169,39 @@ class LinkedList {
       current = current.next;
     }
   }
+
+  // write code to partition a linked list around a value x such that all nodes less than x come before all nodes greater than or equal to x. The partition element x can be anywhere in the right partition ,it doesn't need to appear between the left and right partition.
+  partition(x) {
+    let current, temp;
+    let prev = null;
+    if (this.head === null) {
+      return false;
+    } else {
+      current = this.head;
+    }
+    // iterate through list
+    while (current) {
+      console.log('current.element', current.element);
+      // if the current node is less than the partition value
+      if (prev !== null) {
+        if (current.element < x) {
+          console.log(current.element + ' is less than ' + x);
+          prev.next = current.next;
+          temp = current.next;
+          current.next = this.head;
+          this.head = current;
+          current = temp;
+        } else {
+          prev = current;
+          current = current.next;
+        }
+      } else {
+        prev = current;
+        current = current.next;
+      }
+      myList.printList();
+    }
+  }
 }
 
 myList = new LinkedList();
