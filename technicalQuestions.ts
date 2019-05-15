@@ -226,3 +226,26 @@ const isRotation = (s1, s2) => {
     return; // isSubstring(s1 + s1, s2);
   }
 };
+
+// Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+// You may assume that each input would have exactly one solution, and you may not use the same element twice.
+// Example:
+// Given nums = [2, 7, 11, 15], target = 9,
+// Because nums[0] + nums[1] = 2 + 7 = 9,
+// return [0, 1].
+
+var twoSum = function(nums, target) {
+  let numsObject = new Object();
+  for (let i = 0; i < nums.length; i++) {
+    numsObject[nums[i]] = i;
+  }
+  for (let j = 0; j < nums.length; j++) {
+    let temp = nums[j];
+    let needed = target - temp;
+    if (needed in numsObject && j !== numsObject[needed]) {
+      return [j, numsObject[needed]];
+    }
+  }
+  return undefined;
+};
+twoSum([2, 7, 11, 15], 9);
