@@ -281,14 +281,111 @@ function makeFunc() {
 }
 let myFunc = makeFunc();
 myFunc();
-//prettier-ignore
 /* running this code has the exact same effect as the previous example of the init() function above
   what's different is that the inner function, displayName() is returned from the outer function
   before being executed. 
   Might seem like the code wouldn't work. In some languages the local variables exist only the duration of that
   functions execution. Once makeFunc() has finished executing, you might expect the name variable would no longer
-  be accessible
+  be accessible.
+  This is because of closures, which are a combination of a function and the lexical environment that the
+  function was declared. The environment consists of any local variables that were in-scope at the time the closure
+  was created.
+  myFunc() is a reference to the instance of the function displayName created when makeFunc is run. The instance of
+  displayName maintains a reference to its lexical environment, within which the name exists. For this reason,
+  when myFunc() is invoked, the variable name remains available for use and "owen" is passed to alert.
   */
+
+// TLDR: a closure is a combination of a function and its lexical environment. For example if I did the following
+
+function outerFunc() {
+  let name = 'brutus';
+  function displayBrutus() {
+    console.log(name);
+  }
+  return displayBrutus;
+}
+let testFunc = outerFunc();
+testFunc();
+
+/* you would expect this not to work, but it does in JavaScript. This is because testFunc is a reference to the instance of the
+function displayBrutus() created when testFunc() is run. The instance of displayBrutus() keeps the reference to the lexical environment.
+In that environment, the variable name exists.
+*/
+
+// another example
+function makeAdder(x) {
+  return function(y) {
+    return x + y;
+  };
+}
+let add5 = makeAdder(5);
+let add10 = makeAdder(10);
+console.log(add5(2)); //7
+console.log(add10(2)); //12
+
+/* in this example, add5 and add10 are both closures. makeAdder is a function factory taking a single argument x and returning a
+new function. The function it returns takes a single argument y and returns the sum of x + y.
+add5 and add10 are both closures. add5 has the lexical enviornment where x is = 5 and add10 has lexical environment where x = 10.
+*/
+
+/* how are CLOSURES used practically?
+
+closures are useful because they let you associate some data (through the lexical environment) with a function that operates on
+that data. This has parallels to object oriented programming. Objects allow us to associate some data, with one or more methods.
+
+say we want to add buttons to a webpage to adjust the font size, one way to do this is to specify the font-size of the body,
+then set the size of other elements on the page using the relative unit em.*/
+
+// body {
+//   font-size: 12px;
+// }
+
+// h1 {
+//   font-size: 1.5em;
+// }
+
+// h2 {
+//   font-size: 1.2em;
+// }
+
+function makeSizer(size) {
+  return function() {
+    document.body.style.fontSize = size + 'px';
+  };
+}
+let size12 = makeSizer(12);
+let size14 = makeSizer(14);
+let size16 = makeSizer(16);
+// then we can do the following:
+document.getElementById('size-12').onclick = size12;
+document.getElementById('size-14').onclick = size14;
+document.getElementById('size-16').onclick = size16;
+// with the following html
+// <a href="#" id="size-12">12</a>
+// <a href="#" id="size-14">14</a>
+// <a href="#" id="size-16">16</a>
+
+// CLOSURE SCOPE CHAIN
+// for every closure we have three scopes:
+// local scope (own scope)
+// outer functions scope
+// global scope
+
+// consider the following example:
+// global scope
+var e = 10;
+function sum(a) {
+  return function(b) {
+    return function(c) {
+      //outer functions scope
+      return function(d) {
+        //local scope
+        return a + b + c + d + e;
+      };
+    };
+  };
+}
+console.log(sum(1)(2)(3)(4)); // 20
 
 // What are scopes in javascript?
 
