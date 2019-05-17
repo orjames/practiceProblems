@@ -281,13 +281,14 @@ function makeFunc() {
 }
 let myFunc = makeFunc();
 myFunc();
+//prettier-ignore
 /* running this code has the exact same effect as the previous example of the init() function above
-      what's different is that the inner function, displayName() is returned from the outer function
-      before being executed. 
-      Might seem like the code wouldn't work. In some languages the local variables exist only the duration of that
-      functions execution. Once makeFunc() has finished executing, you might expect the name variable would no longer
-      be accessible
-      */
+  what's different is that the inner function, displayName() is returned from the outer function
+  before being executed. 
+  Might seem like the code wouldn't work. In some languages the local variables exist only the duration of that
+  functions execution. Once makeFunc() has finished executing, you might expect the name variable would no longer
+  be accessible
+  */
 
 // What are scopes in javascript?
 
