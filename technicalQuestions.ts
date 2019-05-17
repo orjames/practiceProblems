@@ -389,7 +389,22 @@ console.log(sum(1)(2)(3)(4)); // 20
 
 // What are scopes in javascript?
 
+/* scope is the context of execution. The context of which values and expressions are "visible" or can be referenced. If a 
+variable or other expression is not "in the current scope" then it is unavailable for use. Scopes can be labeled in 
+hierarchy so a child scope can have access to a parent scope but not the other way around. A function serves as a closure
+in JavaScript thus creates a scope.*/
+
+function exampleFunction() {
+  var x = 'declared inside function'; // can only be used within the function
+  console.log('inside the function');
+  console.log(x);
+}
+console.log(x); //causes error, x is out of scope
+
 // What is asynchronous programming within javascript (callbacks and promises)?
+/* JavaScript is asynchronous by default and is single threaded. This means it can't create other threads to run in parallel.
+lines ofcode are 
+*/
 
 // What is a component within react?
 
