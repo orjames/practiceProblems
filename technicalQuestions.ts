@@ -249,3 +249,48 @@ var twoSum = function(nums, target) {
   return undefined;
 };
 twoSum([2, 7, 11, 15], 9);
+
+// What is a closure in javascript?
+// a closure is the combination of a function and the lexical environment within which the function was declared
+// LEXICAL SCOPING
+// consider the following:
+function init() {
+  let name = 'owen'; // name is a local variable created by init
+  function displayName() {
+    //displayName() is the inner function, a closure
+    alert(name); // using variable declared in parent function
+  }
+  displayName();
+}
+init();
+/* init creates a local variable called name and a function called displayName(). The displayName
+    function is an inner function that is defined inside init() and is only available within the body
+    of the init() function. The displayName() function has no local variables of its own. However, since
+    inner functions have access to the variables of outer functions, displayName() can access the variable
+    name declared in the parent function.
+    */
+// CLOSURE
+// consider the following:
+function makeFunc() {
+  let name = 'owen';
+  function displayName() {
+    alert(name);
+  }
+  return displayName;
+}
+let myFunc = makeFunc();
+myFunc();
+/* running this code has the exact same effect as the previous example of the init() function above
+    what's different is that the inner function, displayName() is returned from the outer function
+    before being executed. 
+    Might seem like the code wouldn't work. In some languages the local variables exist only the duration of that
+    functions execution
+     */
+
+// What are scopes in javascript?
+
+// What is asynchronous programming within javascript (callbacks and promises)?
+
+// What is a component within react?
+
+// What does this statement mean to you “everything in react is a component”?
