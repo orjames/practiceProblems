@@ -403,7 +403,109 @@ console.log(x); //causes error, x is out of scope
 
 // What is asynchronous programming within javascript (callbacks and promises)?
 /* JavaScript is asynchronous by default and is single threaded. This means it can't create other threads to run in parallel.
-lines ofcode are 
+lines of code are executed in series, one after another.
+
+CALLBACKS
+a callback is a simple function that is passed as the value to another function, and will only be executed when the event happens
+JS has first0class functions which can be assigned to variables and passed around to other functions (high-order functions).
+*/
+window.addEventListener('load', () => {
+  //window loaded
+  //do what you want
+});
+// this is an event listener to a page load with an anonymous callback function
+// callbacks are functions that are passed as a value to another function, and will only happen once that event happens.
+setTimeout(() => {
+  // runs after 2 seconds
+}, 2000);
+
+// errors are handled in callbacks with the error object in Node.js.
+fs.readFile('/file.json', (err, data) => {
+  if (err !== null) {
+    //handle error
+    console.log(err);
+    return;
+  }
+  //no errors, process data
+  console.log(data);
+});
+
+// however, callbacks add a level of nesting, with a lot of callbacks, code can get complicated fast
+window.addEventListener('load', () => {
+  document.getElementById('button').addEventListener('click', () => {
+    setTimeout(() => {
+      items.forEach((item) => {
+        //your code here
+      });
+    }, 2000);
+  });
+});
+// this brings us to promises
+//PROMISES
+// a promise is commonly defined as a proxy for a value that will eventually become available.
+/* promises allow for asynchronous code without writing too many callbacks, Async functions use promises
+as their building block
+How promises work:
+once a promise has been called it will start in pending state. This means the called function continues execution, 
+while it waits for the promise to do its own processing, and give the caller function some feedback. At this point
+the caller function waits for it ot either return the promise in a resolved state or in a rejected state, but the
+function continues its execution while the promise does its work. The fetch API uses promises
+*/
+// promise constructor
+let done = true;
+const isItDoneYet = new Promise((resolve, reject) => {
+  if (done) {
+    const workDone = 'Here is the thing I built';
+    resolve(workDone);
+  } else {
+    const why = 'Still working on something else';
+    reject(why);
+  }
+});
+
+// consuming the promise
+const checkIfItsDone = () => {
+  isItDoneYet
+    .then((ok) => {
+      console.log(ok);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+// example of chaining promise, using fetch is the same thing as defining a promise using new Promise()
+const status = (response) => {
+  if (response.status >= 200 && response.status < 300) {
+    return Promise.resolve(response);
+  }
+  return Promise.reject(new Error(response.statusText));
+};
+
+const json = (response) => response.json();
+
+fetch('/todos.json')
+  .then(status)
+  .then(json)
+  .then((data) => {
+    console.log('Request succeeded with JSON response', data);
+  })
+  .catch((error) => {
+    console.log('Request failed', error);
+  });
+
+/* in this example we call fetch() to get a list of TODO items from the todos.json file found in the domain root,
+and we create a chain of promises. Running fetch() returns a response which has many properties and within those we
+reference status - a numeric value representing the HTTP status code, and statusText - a status message which is ok if the
+request succeeded
+response also has a json method which returns a promise that will resolve with the content of the body processed and transformed into JSON
+
+given these premises, this is what happens: the first promise in the chain is a function that we defined, called status(), that
+checks the response status and if it's not a success response (200-299) it rejects the promise.
+This operation will cause the promise chain to skip all the chained promises and will skip directly to the catch() statement at the
+bottom, logging the Request failed text along with the error message.
+If that succeeds instead, it calls the json() function we defined. Since the previous promise, when successful, returned the response
+object, we get it as an input into the second promise
 */
 
 // What is a component within react?
