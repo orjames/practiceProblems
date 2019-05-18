@@ -505,7 +505,8 @@ checks the response status and if it's not a success response (200-299) it rejec
 This operation will cause the promise chain to skip all the chained promises and will skip directly to the catch() statement at the
 bottom, logging the Request failed text along with the error message.
 If that succeeds instead, it calls the json() function we defined. Since the previous promise, when successful, returned the response
-object, we get it as an input into the second promise
+object, we get it as an input into the second promise. In this case, we return the data JSON processed so the third promise receives
+the JSON directly
 */
 
 // What is a component within react?
