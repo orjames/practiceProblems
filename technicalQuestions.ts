@@ -511,4 +511,12 @@ the JSON directly
 
 // What is a component within react?
 
+/* components are the building blocks of react. A component is a JS class or function that optionally accepts inputs (props) and
+returns a React element that describes how a section of the UI should appear.
+Components split the UI into independent, modular, reusable pieces. Can either be a class or function based component.
+*/
+
 // What does this statement mean to you “everything in react is a component”?
+
+// it means that React is like building with pieces of lego and each lego piece is a component that is either a class or a function
+// that describes how a portion of the UI should appear. These components can accept props.
