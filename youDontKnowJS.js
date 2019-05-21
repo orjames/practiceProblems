@@ -1,5 +1,3 @@
-// How many phones and accessories you can purchase
-
 const PHONE_PRICE = 99.99;
 const TAX_RATE = 0.08;
 const SPENDING_THRESHOLD = 200;
@@ -52,3 +50,41 @@ console.log(
   'spent',
   format_amount(spent)
 );
+
+// type of in JavaScript
+var a;
+typeof a; //undefined
+a = 'hello world';
+typeof a; //string
+a = 42;
+typeof a; //number
+a = true;
+typeof a; //boolean
+a = null;
+typeof a; //object, weird bug
+a = undefined;
+typeof a; //undefined
+a = { b: 'c' };
+typeof a; //object
+
+var obj = {
+  a: 'hello world',
+  b: 42,
+};
+
+// Coercion
+var a = '42';
+var b = Number(a);
+var a = '42';
+var b = a * 1; // gives you 42 the number coerces it from a string
+
+// falsy
+// these are the only falsy values:
+// false, 0, '', NaN, null, undefined
+// these are all truthy
+// "hello", 42, true, [], {}, function foo()
+
+var a = '42';
+var b = 42;
+a == b; // true because of coercion
+a === b; // false, no coercion
