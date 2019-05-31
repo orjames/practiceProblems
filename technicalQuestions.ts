@@ -520,3 +520,8 @@ Components split the UI into independent, modular, reusable pieces. Can either b
 
 // it means that React is like building with pieces of lego and each lego piece is a component that is either a class or a function
 // that describes how a portion of the UI should appear. These components can accept props.
+
+//What's the difference between a variable that is: null, undefined or undeclared?
+// How would you go about checking for any of these states?
+// a null variable has an assignment value, whereas undefined means the variable has been declared but not assigned a value.
+// a null variable is an object, whereas a undefined variable is its own type
