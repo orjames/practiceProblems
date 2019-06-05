@@ -525,3 +525,7 @@ Components split the UI into independent, modular, reusable pieces. Can either b
 // How would you go about checking for any of these states?
 // a null variable has an assignment value, whereas undefined means the variable has been declared but not assigned a value.
 // a null variable is an object, whereas a undefined variable is its own type
+
+// What is the difference between a unit test and a functional/integration test?
+// unit testing is for small pieces of code typically functions, it helps you write better code because code that is hard to test
+// is typicall poorly written code.
