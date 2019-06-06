@@ -1,4 +1,4 @@
-const hasUniqueChars = (str) => {
+const hasUniqueChars = str => {
   let ans = 0;
   let arr = str.split('');
   arr.sort();
@@ -16,7 +16,7 @@ const hasUniqueChars = (str) => {
 };
 
 // check if string is all unique characters
-const isUniqueChars = (str) => {
+const isUniqueChars = str => {
   console.log(str);
   if (str.length > 128) {
     return false;
@@ -53,7 +53,7 @@ const permutations = (str1, str2) => {
 };
 
 // given a string, check if it is a permutation of a palindrome ignore casing and non-letter characters
-const isPermutationOfPalendrome = (phrase) => {
+const isPermutationOfPalendrome = phrase => {
   let countOdd = 0;
   let z = 'z';
   let a = 'a';
@@ -137,7 +137,7 @@ const stringCompression = (str: string): string => {
 stringCompression('aaabbc');
 
 // given an image represented by NxN matrix, where each pixel in the image is represented by an intger, write a mehtod to rotate the image by 90 degrees. Can you do this in place?
-const rotate = (matrix) => {
+const rotate = matrix => {
   // if there is empty matrix passed
   /* or if there is a matrix that isn't square, ie length of one inner array
   is different that the outer array*/
@@ -434,7 +434,7 @@ fs.readFile('/file.json', (err, data) => {
 window.addEventListener('load', () => {
   document.getElementById('button').addEventListener('click', () => {
     setTimeout(() => {
-      items.forEach((item) => {
+      items.forEach(item => {
         //your code here
       });
     }, 2000);
@@ -466,31 +466,31 @@ const isItDoneYet = new Promise((resolve, reject) => {
 // consuming the promise
 const checkIfItsDone = () => {
   isItDoneYet
-    .then((ok) => {
+    .then(ok => {
       console.log(ok);
     })
-    .catch((err) => {
+    .catch(err => {
       console.error(err);
     });
 };
 
 // example of chaining promise, using fetch is the same thing as defining a promise using new Promise()
-const status = (response) => {
+const status = response => {
   if (response.status >= 200 && response.status < 300) {
     return Promise.resolve(response);
   }
   return Promise.reject(new Error(response.statusText));
 };
 
-const json = (response) => response.json();
+const json = response => response.json();
 
 fetch('/todos.json')
   .then(status)
   .then(json)
-  .then((data) => {
+  .then(data => {
     console.log('Request succeeded with JSON response', data);
   })
-  .catch((error) => {
+  .catch(error => {
     console.log('Request failed', error);
   });
 
@@ -524,7 +524,7 @@ Components split the UI into independent, modular, reusable pieces. Can either b
 //What's the difference between a variable that is: null, undefined or undeclared?
 // How would you go about checking for any of these states?
 // a null variable has an assignment value, whereas undefined means the variable has been declared but not assigned a value.
-// a null variable is an object, whereas a undefined variable is its own type
+// a null variable is an object, whereas a undefined variable is its own primitive type
 
 // What is the difference between a unit test and a functional/integration test?
 // unit testing is for small pieces of code typically functions, it helps you write better code because code that is hard to test
