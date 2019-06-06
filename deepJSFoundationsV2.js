@@ -64,3 +64,19 @@ typeof v; //"object" can use array.isArray instead
 // undefined means theres definited a varaible at the moment it has no value
 // typeof can reference something that doesn't exist and not throw an error
 // uninitialized is also emptiness
+
+// NaN & isNaN
+// invalid number is a better mental model
+var myAge = Number('0o46'); //38
+var myNextAge = Number('39'); //39
+var myCatsAge = Number('n/a'); //NaN
+myAge - "my son's age"; //NaN coerces the string into the NaN value
+
+myCatsAge === myCatsAge; //false OOPS!
+
+isNaN(myAge); //false
+isNaN(myCatsAge); //true
+isNaN("my son's age"); //true OOPS!
+
+Number.isNaN(myCatsAge); //true
+Number.isNaN("my son's age"); //false
