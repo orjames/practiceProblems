@@ -72,11 +72,27 @@ var myNextAge = Number('39'); //39
 var myCatsAge = Number('n/a'); //NaN
 myAge - "my son's age"; //NaN coerces the string into the NaN value
 
-myCatsAge === myCatsAge; //false OOPS!
+myCatsAge === myCatsAge; //false OOPS! NaN's are not equal to eachother, doesnt have identity property
 
 isNaN(myAge); //false
 isNaN(myCatsAge); //true
-isNaN("my son's age"); //true OOPS!
+isNaN("my son's age"); //true OOPS! coerced values to number before
+// and what number did it coerce it to? the NaN value
+// so of course it'll return true
 
-Number.isNaN(myCatsAge); //true
+Number.isNaN(myCatsAge); //true //Number.isNaN() doesn't do any coercion for us
 Number.isNaN("my son's age"); //false
+typeof NaN; //is a number, but this type is Invalid Number
+
+var trendRate = -0;
+trendRate === -0; //true
+
+trendRate.toString(); //"0" OOPS!
+trendRate === 0; //true OOPS!
+trendRate < 0; //false
+trendRate > 0; //false
+
+Object.is(trendRate, -0); //true
+Object.is(trendRate, 0); //false kindof like ==== quadruple equal, only way to test for negative 0 (-0)
+
+// can use Object.is(myCatsAge, NaN) to check for NaN
