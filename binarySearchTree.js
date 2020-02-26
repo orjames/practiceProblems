@@ -6,13 +6,10 @@ class TreeNode {
   }
 }
 
-class BinaryTree {
+class BinarySearchTree {
   constructor() {
     this.root = null;
   }
-
-  // let's work on the insert method. If the Node doesn't have left_child then create a new Node and set it to the current node's left_child
-  // if it does have a left_child we create a new node a put it in the left_child's place. allocate this left child node to the new nodes left_child
 
   insert(data, node=null) {
     // if starting node wasn't passed in, start at the root (usually the case, only not the case when called recursively)
@@ -90,10 +87,9 @@ class BinaryTree {
       console.log(node.data)
     }
   }
-
 }
 
-const tree = new BinaryTree()
+const tree = new BinarySearchTree()
 tree.insert(8)
 tree.insert(4)
 tree.insert(16)
