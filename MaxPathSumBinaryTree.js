@@ -7,10 +7,10 @@ class TreeNode {
 }
 
 // this funciton returns the maximum path sum
-var maxPathSum = function(root) {
+const maxPathSum = (root) => {
   var best = -Infinity;
   
-  function _maxPathSum(root) {
+  const _maxPathSum = (root) => {
      // base case
     if (!root) {
       return 0;

@@ -1,65 +1,65 @@
 class BinaryTreeNode {
-  constructor(value) {
-    this.value = value;
-    this.left_child = null;
-    this.right_child = null;
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
   }
 
-  // let's work on the insert method. If the Node doesn't have left_child then create a new Node and set it to the current node's left_child
-  // if it does have a left_child we create a new node a put it in the left_child's place. allocate this left child node to the new nodes left_child
-  insertLeft = (value) => {
-    if (!this.left_child) {
+  // let's work on the insert method. If the Node doesn't have left then create a new Node and set it to the current node's left
+  // if it does have a left we create a new node a put it in the left's place. allocate this left child node to the new nodes left
+  insertLeft = (data) => {
+    if (!this.left) {
       // if no left child
-      this.left_child = new BinaryTreeNode(value);
+      this.left = new BinaryTreeNode(data);
     } else {
       // there is a left child
-      const newNode = new BinaryTreeNode(value);
-      // bump the old left_child down
-      newNode.left_child = this.left_child;
-      this.left_child = newNode;
+      const newNode = new BinaryTreeNode(data);
+      // bump the old left down
+      newNode.left = this.left;
+      this.left = newNode;
     }
   }
 
-  insertRight = (value) => {
-    if (!this.right_child) {
-      // if no right_child
-      this.right_child = new BinaryTreeNode(value);
+  insertRight = (data) => {
+    if (!this.right) {
+      // if no right
+      this.right = new BinaryTreeNode(data);
     } else {
-      // there is a right_child
-      const newNode = new BinaryTreeNode(value);
-      // bump the old right_child down
-      newNode.right_child = this.right_child;
-      this.right_child = newNode;
+      // there is a right
+      const newNode = new BinaryTreeNode(data);
+      // bump the old right down
+      newNode.right = this.right;
+      this.right = newNode;
     }
   }
 
   // depth-first-search
   preOrder = () => {
-    console.log(this.value);
-    if (this.left_child) {
-      this.left_child.preOrder();
+    console.log(this.data);
+    if (this.left) {
+      this.left.preOrder();
     }
-    if (this.right_child) {
-      this.right_child.preOrder();
+    if (this.right) {
+      this.right.preOrder();
     }
   };
   inOrder = () => {
-    if (this.left_child) {
-      this.left_child.inOrder();
+    if (this.left) {
+      this.left.inOrder();
     }
-    console.log(this.value);
-    if (this.right_child) {
-      this.right_child.inOrder();
+    console.log(this.data);
+    if (this.right) {
+      this.right.inOrder();
     }
   };
   postOrder = () => {
-    if (this.left_child) {
-      this.left_child.postOrder();
+    if (this.left) {
+      this.left.postOrder();
     }
-    if (this.right_child) {
-      this.right_child.postOrder();
+    if (this.right) {
+      this.right.postOrder();
     }
-    console.log(this.value);
+    console.log(this.data);
   };
 
   // Breadth-First Search
@@ -69,13 +69,13 @@ class BinaryTreeNode {
 
     while(queue.size() !== 0) {
       let current_node = queue.dequeue();
-      console.log(current_node.value);
+      console.log(current_node.data);
 
-      if (current_node.left_child) {
-        queue.enqueue(current_node.left_child)
+      if (current_node.left) {
+        queue.enqueue(current_node.left)
       }
-      if (current_node.right_child) {
-        queue.enqueue(current_node.right_child)
+      if (current_node.right) {
+        queue.enqueue(current_node.right)
       }
     }
   }
@@ -87,22 +87,22 @@ const a_node = new BinaryTreeNode('a')
 a_node.insertLeft('b')
 a_node.insertRight('c')
 
-const b_node = a_node.left_child
+const b_node = a_node.left
 b_node.insertRight('d')
 
-const c_node = a_node.right_child
+const c_node = a_node.right
 c_node.insertLeft('e')
 c_node.insertRight('f')
 
-const d_node = b_node.right_child
-const e_node = c_node.left_child
-const f_node = c_node.right_child
+const d_node = b_node.right
+const e_node = c_node.left
+const f_node = c_node.right
 
-console.log(a_node.value)
-console.log(b_node.value)
-console.log(c_node.value)
-console.log(d_node.value)
-console.log(e_node.value)
-console.log(f_node.value)
+console.log(a_node.data)
+console.log(b_node.data)
+console.log(c_node.data)
+console.log(d_node.data)
+console.log(e_node.data)
+console.log(f_node.data)
 
 console.log(a_node.inOrder());
