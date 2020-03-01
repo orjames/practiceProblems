@@ -28,7 +28,6 @@ def find_max_sum_and_print(root):
 	max_sum = calc_max_sum(root)
 	print("Max Sum from root to Leaf Node is:", max_sum)
 
-# nothing
 
 # Driver
 if __name__ == '__main__':
